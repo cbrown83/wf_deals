@@ -3,6 +3,11 @@ import json
 from urllib import parse
 from bs4 import BeautifulSoup
 import us
+import string
+
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
 
 state_abbreviations = None
 
@@ -11,9 +16,9 @@ LANDING_PAGE_LINK = 'https://www.wholefoodsmarket.com/sales-flyer'
 sale_items = {}
 
 def scrape(): 
-    state = 'Washington'
-    city = 'Redmond'
-    street = ''
+    state = 'California'
+    city = 'Los Angeles'
+    street = 'national blvd'
 
     store_sales_url = _get_store_sale_page(state, city, street)
 
@@ -27,35 +32,61 @@ def scrape():
 
 def _get_store_sale_page(state, city, street): 
     global state_abbreviations
-    initial_page = requests.get(LANDING_PAGE_LINK)
-    soup = BeautifulSoup(initial_page.text, 'html.parser')
-    
     state_abbreviation = state_abbreviations[state]
 
-    states_with_stores = soup.find(class_ = 'store-select form-select')
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    driver = webdriver.Chrome(chrome_options=options)
 
-    #current html labels stores by <state_abbrev><city> 
-    #e.g. WARedmond for store in Redmond, WA
-    label = state_abbreviation + city
-    city_stores = states_with_stores.findAll('optgroup', 
-            {'label': label})
+    driver.get(LANDING_PAGE_LINK)
+    sel = Select(driver.find_element_by_id('edit-state'))
+    try: 
+        sel.select_by_value(state_abbreviation)
+    except NoSuchElementException: #no stores found in state
+        exit(1)
+        #raise StoreNotFoundException('No store in ' + state 
+        #        + ' exists.')
 
-    city_store = None
 
-    if len(city_stores) < 1: #No store found in given city
-        raise StoreNotFoundException('No store in ' + city + ', ' + state 
-                + ' exists.')
-        
+    sel_cities = Select(driver.find_element_by_id('edit-store'))
+    city_stores = None
+    try: 
+        city_stores = driver.find_element_by_xpath('//optgroup[@label="'+city+'"]').find_elements_by_tag_name('option')
+    except NoSuchElementException: #no stores found in city
+        exit(1)
+        #raise StoreNotFoundException('No store in ' + city + ', ' + state 
+        #       + ' exists.')
+
+    store = None
+
     #TODO make sure a street was given
-    elif len(city_stores) > 1: #multiple stores in given city
-        city_stores = city_stores.find(label_ = street)
+    if len(city_stores) > 1: #multiple stores in given city
+        street_keywords = street.split(' ')
+        #for each store in the city
+        for city_store in city_stores: 
+            store_address = city_store.get_attribute('label').split('-')[1]
+            address_keywords = store_address.split(' ')[2:]#strip street number
+
+            #strip punctuation
+            trans = str.maketrans('','', string.punctuation)
+            address_keywords = list(map(lambda x : x.translate(trans).lower(), address_keywords)) 
+
+            is_match = True
+            i = 0
+            while is_match and i < len(address_keywords): 
+                if address_keywords[i] not in street_keywords: 
+                    is_match = False
+                i += 1
+
+            if is_match: 
+                store = city_store
 
     else: #just one store in given city
-        city_store = city_stores[0]
+        store = city_stores[0]
 
 
     #get the unique store id for the store in the given state, city, and street
-    store_id = city_store.find('option').attrs['value']
+    store_id = store.get_attribute('value')
 
     #get the url to the weekly sales for the store
     values = {'state': state_abbreviation, 
