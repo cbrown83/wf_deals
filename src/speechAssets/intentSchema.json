@@ -1,0 +1,411 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "whole foods dealer",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetDeals",
+                    "slots": [
+                        {
+                            "name": "state",
+                            "type": "AMAZON.US_STATE"
+                        },
+                        {
+                            "name": "city",
+                            "type": "AMAZON.US_CITY",
+                            "samples": [
+                                "{city}"
+                            ]
+                        },
+                        {
+                            "name": "street",
+                            "type": "AMAZON.PostalAddress"
+                        }
+                    ],
+                    "samples": [
+                        "what are the sales in {city} {state} on {street}",
+                        "what are the sales in {city} {state}",
+                        "what are the sales",
+                        "what are this week's sales in {city} {state} on {street}",
+                        "what are this week's sales in {city} {state}",
+                        "what are this week's sales",
+                        "what's on sale this week",
+                        "sales",
+                        "weekly deals",
+                        "deals",
+                        "sale items",
+                        "tell me what specials are running this week",
+                        "tell me the specials this week",
+                        "tell me the weekly specials",
+                        "tell me the specials",
+                        "tell me the specials in {city} {state} on {street} this week",
+                        "tell me the specials in {city} {state} this week",
+                        "tell me the specials in {city} {state} on {state}",
+                        "tell me the specials in {city} {state}",
+                        "tell me the weekly specials in {city} {state} on {street}",
+                        "tell me the weekly specials in {city} {state}",
+                        "tell me what specials are running this week in {city} {state} on {street}",
+                        "tell me what specials are running this week in {city} {state}",
+                        "sale items in {city} {state} on {street} this week",
+                        "sale items in {city} {state} this week",
+                        "sale items in {city} {state} on {street}",
+                        "sale items in {city} {state}",
+                        "deals in {city} {state} this week",
+                        "deals in {city} {state} on {street} this week",
+                        " weekly deals in {city} {state} on {street}",
+                        "weekly deals in {city} {state} ",
+                        "sales in {city} {state} on {street}",
+                        "sales in {city} {state}",
+                        "sales for {city} {state} on {street}",
+                        "sales for {city} {state}",
+                        "what's on sale this week in {city} {state}",
+                        "what's on sale this week in {city} {state} on {street}",
+                        "deals in {city} {state} on {street}",
+                        "deals in {city} {state}",
+                        "{city} {state} on {street}",
+                        " {city} {state}",
+                        "what are the weekly deals in {city}  {state} on {street}",
+                        "what are the weekly deals in {city}  {state}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetDealsByCategory",
+                    "slots": [
+                        {
+                            "name": "state",
+                            "type": "AMAZON.US_STATE",
+                            "samples": [
+                                "{state}"
+                            ]
+                        },
+                        {
+                            "name": "city",
+                            "type": "AMAZON.US_CITY",
+                            "samples": [
+                                "{city}"
+                            ]
+                        },
+                        {
+                            "name": "street",
+                            "type": "AMAZON.PostalAddress"
+                        },
+                        {
+                            "name": "category",
+                            "type": "AMAZON.Food"
+                        }
+                    ],
+                    "samples": [
+                        "{category} is on sale this week in {city} {state}"
+                    ]
+                },
+                {
+                    "name": "GetDealsByBrand",
+                    "slots": [
+                        {
+                            "name": "city",
+                            "type": "AMAZON.US_CITY",
+                            "samples": [
+                                "{city}"
+                            ]
+                        },
+                        {
+                            "name": "state",
+                            "type": "AMAZON.US_STATE",
+                            "samples": [
+                                "{state}"
+                            ]
+                        },
+                        {
+                            "name": "street",
+                            "type": "AMAZON.PostalAddress"
+                        },
+                        {
+                            "name": "brand",
+                            "type": "AMAZON.Organization"
+                        }
+                    ],
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "AMAZON.US_STATE",
+                    "values": [
+                        {
+                            "id": "ON",
+                            "name": {
+                                "value": "ontario"
+                            }
+                        },
+                        {
+                            "id": "BC",
+                            "name": {
+                                "value": "british columbia"
+                            }
+                        },
+                        {
+                            "id": "UK",
+                            "name": {
+                                "value": "united kingdom"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "AMAZON.US_CITY",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "London"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Toronto"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Ottawa"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Oakville"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Mississauga"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Markham"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "West Vancouver"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Victoria"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Vancouver"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "North Vancouver"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Burnaby"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "GetDeals",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "state",
+                            "type": "AMAZON.US_STATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.676041558799.12075510425"
+                            }
+                        },
+                        {
+                            "name": "city",
+                            "type": "AMAZON.US_CITY",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.676041558799.393837333850"
+                            }
+                        },
+                        {
+                            "name": "street",
+                            "type": "AMAZON.PostalAddress",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "GetDealsByCategory",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "state",
+                            "type": "AMAZON.US_STATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.766597246158.277048221392"
+                            }
+                        },
+                        {
+                            "name": "city",
+                            "type": "AMAZON.US_CITY",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.766597246158.190856344878"
+                            }
+                        },
+                        {
+                            "name": "street",
+                            "type": "AMAZON.PostalAddress",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "category",
+                            "type": "AMAZON.Food",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "GetDealsByBrand",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "city",
+                            "type": "AMAZON.US_CITY",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1259702525959.912232742252"
+                            }
+                        },
+                        {
+                            "name": "state",
+                            "type": "AMAZON.US_STATE",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1259702525959.759475950525"
+                            }
+                        },
+                        {
+                            "name": "street",
+                            "type": "AMAZON.PostalAddress",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "brand",
+                            "type": "AMAZON.Organization",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                }
+            ]
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.676041558799.12075510425",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what state is the store in"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.676041558799.393837333850",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what city is the store in"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.766597246158.277048221392",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what state is the store in"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.766597246158.190856344878",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what city is the store in"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1259702525959.912232742252",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what city is the store in"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1259702525959.759475950525",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what state is the store in"
+                    }
+                ]
+            }
+        ]
+    }
+}
