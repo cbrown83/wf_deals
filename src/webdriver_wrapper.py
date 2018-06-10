@@ -3,6 +3,8 @@ import shutil
 import uuid
 
 from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
 
 
 class WebDriverWrapper:
@@ -57,6 +59,16 @@ class WebDriverWrapper:
     def get_inner_html(self, xpath):
         elem_value = self._driver.find_element_by_xpath(xpath)
         return elem_value.get_attribute('innerHTML')
+
+    def get_elements(self, xpath, tag_name): 
+        elems = self._driver.find_element_by_xpath(xpath).find_elements_by_tag_name(tag_name)
+        return elems 
+    
+    def select_by_value(self, value): 
+        self._driver.select_by_value(value)
+
+    def select(self, element_id): 
+        return Select(self._driver.find_element_by_id(element_id))
 
     def close(self):
         # Close webdriver connection
